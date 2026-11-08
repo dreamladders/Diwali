@@ -1,4 +1,110 @@
 (() => {
+
+  
+  // DREAM LADDERS LOGO ANIMATION
+
+  const loader = document.getElementById('dl-loader');
+
+  const reducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+
+  if (reducedMotion) {
+    loader.remove();
+  } else {
+
+    gsap.set('.dl-part-1', {
+      x: -120,
+      rotation: -25,
+      scale: 0.8
+    });
+
+    gsap.set('.dl-part-2', {
+      x: 120,
+      rotation: 25,
+      scale: 0.8
+    });
+
+    gsap.set('.dl-part-3', {
+      y: -80,
+      rotation: -10
+    });
+
+    gsap.set('.dl-part-4', {
+      scale: 0,
+      opacity: 0
+    });
+
+    const intro = gsap.timeline({
+      onComplete: () => {
+        gsap.to(loader, {
+          opacity: 0,
+          duration: 0.9,
+          ease: 'power2.inOut',
+          onComplete: () => loader.remove()
+        });
+      }
+    });
+
+    intro.to('.dl-part-1', {
+      opacity: 1,
+      strokeDashoffset: 0,
+      x: 0,
+      rotation: 0,
+      scale: 1,
+      duration: 1.2,
+      ease: 'power3.out'
+    });
+
+    intro.to('.dl-part-2', {
+      opacity: 1,
+      strokeDashoffset: 0,
+      x: 0,
+      rotation: 0,
+      scale: 1,
+      duration: 1.2,
+      ease: 'power3.out'
+    }, '-=0.9');
+
+    intro.to('.dl-part-3', {
+      opacity: 1,
+      strokeDashoffset: 0,
+      y: 0,
+      rotation: 0,
+      duration: 1,
+      ease: 'power3.out'
+    }, '-=0.8');
+
+    intro.to('.dl-part-4', {
+      opacity: 1,
+      strokeDashoffset: 0,
+      scale: 1,
+      duration: 0.8,
+      ease: 'back.out(2)'
+    }, '-=0.6');
+
+    intro.to('#dl-logo', {
+      scale: 1.05,
+      duration: 0.5,
+      ease: 'power2.out'
+    });
+
+    intro.to('.dl-loader-text', {
+      opacity: 1,
+      y: -5,
+      duration: 0.8
+    }, '-=0.2');
+
+    intro.to('.dl-loader-caption', {
+      opacity: 1,
+      duration: 0.6
+    }, '-=0.4');
+
+    intro.to({}, {
+      duration: 1
+    });
+  }
+
   const canvas = document.getElementById('cosmos');
   const ctx = canvas.getContext('2d');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
