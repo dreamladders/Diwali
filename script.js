@@ -128,3 +128,98 @@
   document.getElementById('miniAction').addEventListener('click',()=>showToast('This is a sample concept — ask us to create yours.'));
   const menu=document.getElementById('menuBtn'),nav=document.querySelector('.topbar nav');menu.addEventListener('click',()=>nav.classList.toggle('open'));nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
 })();
+
+
+/* =========================================
+   DREAM LADDERS — INITIAL ALIGNMENT FIX
+   ========================================= */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 0;
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  overflow-x: clip;
+}
+
+/* Hero viewport */
+.hero {
+  box-sizing: border-box;
+  position: relative;
+  min-height: max(790px, 100svh);
+  height: 100svh;
+  max-height: 1050px;
+}
+
+/* Canvas must not affect document layout */
+#cosmos {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Logo intro */
+#dl-loader {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+/* Prevent layout changes from loader */
+.dl-loader-content {
+  width: 100%;
+  min-height: 100%;
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+  .hero {
+    min-height: 880px;
+    height: auto;
+    max-height: none;
+    padding-top: calc(110px + env(safe-area-inset-top));
+    padding-bottom: 75px;
+    overflow: hidden;
+  }
+
+  .hero-copy {
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  .lamp-stage {
+    flex-shrink: 0;
+    width: 100%;
+    height: 390px;
+    margin-top: 5px;
+    margin-bottom: -65px;
+    transform: scale(.78);
+    transform-origin: top center;
+  }
+
+  .scroll-cue {
+    bottom: 22px;
+  }
+
+  #dl-loader {
+    height: 100vh;
+    height: 100dvh;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+}
